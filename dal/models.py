@@ -2,6 +2,10 @@ from django.db import models
 from django.core import validators
 from django.contrib.auth.models import User, Group
 from django.utils import timezone
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.conf import settings
+from rest_framework.authtoken.models import Token
 # Create your models here.
 
 
@@ -10,7 +14,6 @@ class Client(User):
     address = models.CharField(max_length=100)
     contact_number = models.CharField(max_length=20, validators=[validators.RegexValidator('[\+]{0,1}[0-9][0-9\-]+')])
     calls_to_center = models.IntegerField()
-
 
 class Line(models.Model):
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, help_text="The user of this phone line", null=True, blank=True)
@@ -64,3 +67,7 @@ class Payment(models.Model):
         super().save(force_insert, force_update, using, update_fields)
 
 
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)

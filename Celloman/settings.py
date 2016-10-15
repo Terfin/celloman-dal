@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'dal',
 ]
 
@@ -124,3 +125,11 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 
 LOGIN_REDIRECT_URL = '/api/users/'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
