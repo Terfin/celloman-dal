@@ -9,4 +9,5 @@ router.register('contenttype', views.ContentTypeViewSet)
 router.register('permissions', views.PermissionViewSet)
 router.register('groups', views.GroupViewSet)
 router.register('users', views.UserViewSet)
+router.register('clients', views.ClientViewSet)
 urlpatterns += router.urls

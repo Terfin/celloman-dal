@@ -34,6 +34,9 @@ class ClientType(models.Model):
     minutes_price = models.FloatField()
     sms_price = models.FloatField()
 
+    def __str__(self):
+        return self.name
+
 
 class Package(models.Model):
     name = models.CharField(max_length=100)
