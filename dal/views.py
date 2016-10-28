@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, filters
 from . import serializers
 from django.contrib.auth.models import Permission, Group, User
 from django.contrib.contenttypes.models import ContentType
@@ -41,3 +41,4 @@ class ClientViewSet(viewsets.ModelViewSet):
 
     queryset = Client.objects.all()
     serializer_class = serializers.ClientSerializer
+    filter_fields = ('username', )

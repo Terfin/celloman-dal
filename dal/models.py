@@ -13,7 +13,11 @@ class Client(User):
     type = models.ForeignKey('ClientType', null=True, related_name='clients')
     address = models.CharField(max_length=100)
     contact_number = models.CharField(max_length=20, validators=[validators.RegexValidator('[\+]{0,1}[0-9][0-9\-]+')])
-    calls_to_center = models.IntegerField()
+    calls_to_center = models.IntegerField(default=0, blank=True)
+
+    @property
+    def joined_date(self):
+        return self.date_joined.date()
 
 class Line(models.Model):
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, help_text="The user of this phone line", null=True, blank=True)

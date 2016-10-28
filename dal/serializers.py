@@ -9,6 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
 
 
+
 class PermissionSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -28,5 +29,8 @@ class ContentTypeSerializer(serializers.ModelSerializer):
 
 class ClientSerializer(serializers.ModelSerializer):
 
+    date_joined = serializers.DateField(source='joined_date', read_only=True)
+
     class Meta:
         model = Client
+        fields = ('first_name', 'last_name', 'username', 'address', 'contact_number', 'id', 'calls_to_center', 'date_joined')
