@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User, Permission, Group
 from django.contrib.contenttypes.models import ContentType
-from .models import Client
+from .models import Client, ClientType
+
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -33,4 +34,10 @@ class ClientSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Client
-        fields = ('first_name', 'last_name', 'username', 'address', 'contact_number', 'id', 'calls_to_center', 'date_joined')
+        fields = ('first_name', 'last_name', 'username', 'address', 'contact_number', 'id', 'calls_to_center', 'date_joined', 'type')
+
+
+class ClientTypeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ClientType

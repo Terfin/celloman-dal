@@ -19,8 +19,13 @@ class Client(User):
     def joined_date(self):
         return self.date_joined.date()
 
+class LinePrefix(models.Model):
+
+    prefix = models.CharField(max_length=3)
+
 class Line(models.Model):
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, help_text="The user of this phone line", null=True, blank=True)
+    prefix = models.ForeignKey('LinePrefix', null=True)
     number = models.CharField(max_length=20)
     status = models.CharField(max_length=15)
     package = models.ForeignKey('Package')
